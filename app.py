@@ -49,7 +49,11 @@ emotion_images = {
     "anger": "https://i.pinimg.com/736x/86/39/e0/8639e06333cd4b295e1f0a904d125029.jpg",
     "fear": "https://i.pinimg.com/1200x/39/6e/4d/396e4d4774d0dbc95146d5940be32ea9.jpg",
     "suprise": "https://i.pinimg.com/1200x/0e/33/a5/0e33a5ff2bd24858db5db50da575f703.jpg",
-    "love": "https://i.pinimg.com/1200x/04/c7/54/04c7544d34b87376bb0fb84d2ba29ec4.jpg"
+    "love": "https://i.pinimg.com/1200x/04/c7/54/04c7544d34b87376bb0fb84d2ba29ec4.jpg",
+    # this two emotions "shy" and "disgust" are not included in project dataset emotion
+    # this two emotions are only for member page character representation :)
+    "shy": "https://i.pinimg.com/1200x/b3/93/cf/b393cf91a9821fc4228bce309d214d15.jpg",
+    "disgust": "https://i.pinimg.com/736x/6e/e3/e6/6ee3e67cbe234cb8ec45139194f1bb51.jpg"
 }
 
 # --- Home / Intro Page ---
@@ -86,13 +90,30 @@ elif choice == "Classifier":
 elif choice == "Members":
     st.title("Project Members")
     st.write("Meet the team behind this project:")
-    st.markdown("""
-    - **Wint Wah Kyaw Soe** – Streamlit App Integration   
-    - **Ingyin Phyu** – Knowledge Representation  
-    - **May Me Wai Zin** – Model Train  
-    - **Aye Yu Mon** – Data Preprocessing & Cleaning  
-    - **Kalayar Lin Mon** – Power BI Visualization
-    - **Shwe YaMin** – Power BI Visualization  
-    - **Khin Chaw Thant** – Applied ETL Process  
-    - **Phoo Pwint Han** – Applied ETL Process    
-    """)
+
+    members = [
+        {"name": "Wint Wah Kyaw Soe", "role": "Streamlit App Integration", "emotion": "joy"},
+        {"name": "Ingyin Phyu", "role": "Knowledge Representation", "emotion": "sadness"},
+        {"name": "May Me Wai Zin", "role": "Model Train", "emotion": "anger"},
+        {"name": "Aye Yu Mon", "role": "Data Preprocessing & Cleaning", "emotion": "fear"},
+        {"name": "Kalayar Lin Mon", "role": "Power BI Visualization", "emotion": "suprise"},
+        {"name": "Shwe YaMin", "role": "Power BI Visualization", "emotion": "love"},
+        {"name": "Khin Chaw Thant", "role": "Applied ETL Process", "emotion": "shy"},
+        {"name": "Phoo Pwint Han", "role": "Applied ETL Process", "emotion": "disgust"},
+    ]
+
+    # Display 3 members per row
+    for i in range(0, len(members), 3):
+        cols = st.columns(3)
+        for j, col in enumerate(cols):
+            if i + j < len(members):
+                member = members[i + j]
+                with col:
+                    st.subheader(member["name"])
+                    st.write(f"**Role:** {member['role']}")
+                    if member["emotion"] in emotion_images:
+                        st.image(
+                            emotion_images[member["emotion"]],
+                            width=200,
+                            caption=f"{member['emotion'].capitalize()} Character"
+                        )
