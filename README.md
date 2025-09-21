@@ -51,7 +51,7 @@ These datasets were preprocessed and split into training and testing sets for bu
 - Training machine learning models on multiple datasets  
 - Performance comparison across different models and tools  
 - Interactive emotion detection demo built with **Streamlit**  
-- Visualization of emotion distribution and model performance in **Power BI**  
+- Visualization of emotion distribution **PowerBI** and evaluating model performance in **Weka**
 
 ---
 
